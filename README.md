@@ -1,10 +1,11 @@
 # ColesRecipes
 
 A SwiftUI iOS app developed as part of a coding challenge.
+It showcases MVVM architecture, local JSON parsing, responsive layout with LazyVGrid, and includes unit & UI tests.
 
 ---
 
-## Project Overview 
+## Overview 
 
 **Project: Coles Recipes App (Coding Challenge)**
 
