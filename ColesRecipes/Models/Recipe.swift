@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A model representing a single recipe.
 public struct Recipe: Identifiable, Codable, Equatable {
     public let id = UUID()
     public let title: String

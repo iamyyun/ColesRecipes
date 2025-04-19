@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A model representing preparation and cooking details for a recipe.
 public struct Detail: Codable, Equatable {
     public let amountLabel: String
     public let amountNumber: Int

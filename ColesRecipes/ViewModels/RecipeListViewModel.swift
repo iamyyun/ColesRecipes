@@ -11,6 +11,7 @@ import Foundation
 class RecipeListViewModel: ObservableObject {
     @Published var recipes: [Recipe] = []
     
+    /// Loads recipe data from 'recipesSample.json' and decodes the JSON into 'recipes' property.
     func loadRecipes() {
         guard let url = Bundle.main.url(forResource: "recipesSample", withExtension: "json") else {
             print("Could not find JSON file.")

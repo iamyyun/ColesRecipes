@@ -13,7 +13,7 @@ struct RecipeView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                // Header image
+                // Thumbnail image
                 AsyncImage(url: URL(string: "http://www.coles.com.au" + recipe.thumbnail)) { image in
                     image
                         .resizable()
@@ -34,7 +34,7 @@ struct RecipeView: View {
                         .font(.body)
                         .padding(.top, 5)
 
-                    // Prep and cook information
+                    // Serves, prep and cook information
                     HStack {
                         VStack(alignment: .leading) {
                             Label {

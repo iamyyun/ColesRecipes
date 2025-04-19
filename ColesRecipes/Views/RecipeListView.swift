@@ -23,12 +23,16 @@ struct RecipeListView: View {
             
             NavigationView {
                 ScrollView {
+                    // Grid of recipe cards
                     LazyVGrid(columns: columns, spacing: spacing) {
                         ForEach(viewModel.recipes) { recipe in
+                            // Navigation to detailed recipe view
                             NavigationLink(destination: RecipeView(recipe: recipe)) {
                                 ZStack(alignment: .top) {
                                     Color.clear // invisible layer for height equalization
+                                    
                                     VStack(spacing: 0) {
+                                        // Recipe thumbnaill image
                                         AsyncImage(url: URL(string: "http://www.coles.com.au" + recipe.thumbnail)) { image in
                                             image
                                                 .resizable()
@@ -39,7 +43,7 @@ struct RecipeListView: View {
                                             Color.gray.frame(height: 150)
                                         }
 
-                                        // Recipe title and times
+                                        // Recipe title and prep/cook times
                                         VStack(alignment: .leading, spacing: 4) {
                                             Text(recipe.title)
                                                 .font(.headline)
@@ -71,13 +75,14 @@ struct RecipeListView: View {
                 .navigationBarTitleDisplayMode(.inline)
             }
             .onAppear {
+                // Load recipes from local JSON
                 viewModel.loadRecipes()
             }
         }
     }
 }
 
-/// ViewModifier to normalize height
+/// ViewModifier to equalize height of grid items
 fileprivate var maxHeight: CGFloat = 0  // shared height storage
 
 struct HeightEqualizer: ViewModifier {

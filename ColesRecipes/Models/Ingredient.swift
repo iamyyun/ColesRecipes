@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A model representing a single ingredient in a recipe.
 public struct Ingredient: Identifiable, Codable, Equatable {
     public var id = UUID()
     public let item: String
