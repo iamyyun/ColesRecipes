@@ -12,19 +12,22 @@ class RecipeListViewModel: ObservableObject {
     @Published var recipes: [Recipe] = []
     
     /// Loads recipe data from 'recipesSample.json' and decodes the JSON into 'recipes' property.
-    func loadRecipes() {
-        guard let url = Bundle.main.url(forResource: "recipesSample", withExtension: "json") else {
-            print("Could not find JSON file.")
-            return
-        }
-
+    @MainActor
+    func loadRecipes() async {
         do {
-            let data = try Data(contentsOf: url)
-            let decoder = JSONDecoder()
-            let decoded = try decoder.decode(RecipeResponse.self, from: data)
+            let data = try await fetchLocalJSON(named: "recipesSample")
+            let decoded = try JSONDecoder().decode(RecipeResponse.self, from: data)
             self.recipes = decoded.recipes
         } catch {
-            print("Failed to decode: \(error)")
+            print("Failed to load recipes: \(error)")
         }
+    }
+    
+    private func fetchLocalJSON(named filename: String) async throws -> Data {
+        guard let url = Bundle.main.url(forResource: filename, withExtension: "json") else {
+            print("Could not find JSON file.")
+            throw URLError(.fileDoesNotExist)
+        }
+        return try Data(contentsOf: url)
     }
 }

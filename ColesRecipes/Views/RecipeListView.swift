@@ -76,7 +76,9 @@ struct RecipeListView: View {
             }
             .onAppear {
                 // Load recipes from local JSON
-                viewModel.loadRecipes()
+                Task {
+                    await viewModel.loadRecipes()
+                }
             }
         }
     }
